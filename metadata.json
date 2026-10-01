@@ -1,0 +1,6 @@
+{
+  "name": "Nihongo Master L26 - Minna No Nihongo JLPT N4",
+  "description": "Interactive Japanese vocabulary learning web app for Minna No Nihongo Lesson 26 (JLPT N4) with furigana, audio pronunciation, Bengali & English meanings, and SRS flashcards.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

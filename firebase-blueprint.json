@@ -1,0 +1,64 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Learner account profile, XP, and daily streak progress.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Unique identifier of the user (Firebase Auth UID)." },
+        "displayName": { "type": "string", "description": "Display name of the user." },
+        "email": { "type": "string", "description": "User email address." },
+        "xp": { "type": "number", "description": "Total accumulated experience points." },
+        "streak": { "type": "number", "description": "Current consecutive active days." },
+        "lastActiveDate": { "type": "string", "description": "YYYY-MM-DD date stamp of last activity." },
+        "dailyGoal": { "type": "number", "description": "Target number of flashcards per day." },
+        "updatedAt": { "type": "number", "description": "Unix timestamp of last modification." }
+      },
+      "required": ["userId", "xp", "streak"]
+    },
+    "SRSItem": {
+      "title": "SRSItem",
+      "description": "Spaced repetition state for a specific vocabulary item.",
+      "type": "object",
+      "properties": {
+        "vocabId": { "type": "number", "description": "Minna No Nihongo vocabulary ID." },
+        "interval": { "type": "number", "description": "Review interval in days." },
+        "repetition": { "type": "number", "description": "Consecutive successful recall count." },
+        "easeFactor": { "type": "number", "description": "SuperMemo SM-2 difficulty multiplier." },
+        "nextReview": { "type": "number", "description": "Unix timestamp in milliseconds for next scheduled review." },
+        "historyCount": { "type": "number", "description": "Total times this item has been reviewed." },
+        "lastRating": { "type": "string", "enum": ["hard", "good", "easy"], "description": "Rating assigned in last review." },
+        "updatedAt": { "type": "number", "description": "Timestamp when this record was updated." }
+      },
+      "required": ["vocabId", "interval", "repetition", "easeFactor", "nextReview", "historyCount"]
+    },
+    "UserSettings": {
+      "title": "UserSettings",
+      "description": "User preferences for display, theme, audio, and furigana.",
+      "type": "object",
+      "properties": {
+        "showFurigana": { "type": "boolean", "description": "Whether to render furigana annotations above Kanji." },
+        "showRomaji": { "type": "boolean", "description": "Whether to show Latin phonetic reading." },
+        "fontSize": { "type": "string", "enum": ["normal", "large", "xlarge"], "description": "Font size scaling preference." },
+        "speechRate": { "type": "number", "description": "Japanese TTS playback speed multiplier." },
+        "theme": { "type": "string", "enum": ["system", "dark", "light"], "description": "Color theme." },
+        "updatedAt": { "type": "number", "description": "Timestamp of last settings change." }
+      },
+      "required": ["showFurigana", "speechRate", "theme"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "Root user profile document storing XP, streak, and daily goals."
+    },
+    "/users/{userId}/srs/{vocabId}": {
+      "schema": { "$ref": "#/entities/SRSItem" },
+      "description": "Individual SRS progress record for each Japanese vocabulary item."
+    },
+    "/users/{userId}/settings/display": {
+      "schema": { "$ref": "#/entities/UserSettings" },
+      "description": "User preferences for Japanese learning interface and audio."
+    }
+  }
+}

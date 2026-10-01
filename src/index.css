@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --app-font-scale: 1;
+}
+
+html[data-font-size="s"] {
+  font-size: 14px;
+}
+html[data-font-size="m"] {
+  font-size: 16px;
+}
+html[data-font-size="l"] {
+  font-size: 18px;
+}
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', 'Noto Sans JP', 'Hind Siliguri', sans-serif;
+  }
+
+  ruby {
+    ruby-position: over;
+    ruby-align: center;
+  }
+
+  rt {
+    font-size: 0.58em;
+    line-height: 1;
+    color: #38bdf8; /* Sky-400 for high-contrast legible furigana */
+    font-weight: 500;
+    user-select: none;
+    letter-spacing: 0.02em;
+    padding-bottom: 1px;
+  }
+
+  .ruby-no-furigana rt {
+    display: none !important;
+  }
+
+  /* Custom scrollbar for dark theme */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0f172a;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+  }
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
